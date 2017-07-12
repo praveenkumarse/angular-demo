@@ -34,39 +34,37 @@ export class DashboardComponent implements OnInit {
   }
   public removeRow(index) {
     if (this.infoForm.value.info[index]._id) {
-      this.deleteInformation(this.infoForm.value[index]._id);
+      this.deleteInformation(this.infoForm.value.info[index]._id);
     } else {
       const temp = this.infoForm.controls['info'] as FormArray;
       temp.removeAt(index)
     }
-
-
-
-
   }
 
   public addInformation() {
-    console.log("hello", this.infoForm.value)
-    this.infoForm.value.forEach(element => {
+    this.infoForm.value.info.forEach(element => {
       delete element._id
     });
     let url = "http://localhost:3000/add";
     this.global.postRequest(url, this.infoForm.value)
       .subscribe(res => {
         console.log(res);
+      }, error => {
+        console.log(error)
       })
   }
   public getInformation() {
     let url = "http://localhost:3000/info";
     this.global.getRequest(url)
       .subscribe(res => {
-        console.log("hello test",res.info)
+        let tempArray = res.info;
         const temp = this.infoForm.controls['info'] as FormArray;
-        res.info.forEach(element => {
-          temp.patchValue(element)
+        for (let key in tempArray) {
+          temp.at(parseInt(key)).patchValue(tempArray[key])
           this.addRow();
-        });
-
+        }
+      }, error => {
+        console.log(error)
       })
   }
   public deleteInformation(id) {
@@ -74,6 +72,19 @@ export class DashboardComponent implements OnInit {
     this.global.deleteRequest(url)
       .subscribe(res => {
         console.log("data deleted successfully")
+      }, error => {
+        console.log(error)
+      })
+  }
+  public updateInformation(index) {
+    let id=this.infoForm.value.info[index]._id;
+    let data=this.infoForm.value.info[index]
+    let url = `http://localhost:3000/update/${id}`;
+    this.global.putRequest(url,data)
+      .subscribe(res => {
+        console.log("Update successfully")
+      }, error => {
+        console.log(error)
       })
   }
 }
