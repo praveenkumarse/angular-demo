@@ -20,8 +20,8 @@ export class GlobalService {
       })
   }
 
-  public postRequest(url, data): Observable<any> {
-    return this.http.post(url, data)
+  public postRequest(url, data,header?): Observable<any> {
+    return this.http.post(url, data,header)
       .map(res => {
         return res.json();
       })

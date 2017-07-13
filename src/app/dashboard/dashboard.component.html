@@ -1,24 +1,18 @@
-<div [formGroup]="infoForm" style="margin-top: 25px">
+<div [formGroup]="infoForm " class="top-container ">
     <div formArrayName="info">
         <div *ngFor="let item of infoForm.get('info').controls; index as i  ">
             <div class="row container form-group" [formGroupName]="i">
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <input type="text" class="form-control" placeholder="First Name" formControlName="firstName" />
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <input type="text" class="form-control" placeholder="Last Name" formControlName="lastName" />
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-2">
                     <input type="number" class="form-control" placeholder="Number" formControlName="number" />
                 </div>
                 <div class="col-sm-1">
-                    <input class="btn btn-success" class="form-control" type="button" placeholder="Number" value="Add" (click)="addRow()" />
-                </div>
-                <div class="col-sm-1">
                     <input class="btn btn-success" type="button" placeholder="Number" value="Submit" (click)="addInformation()" />
-                    <ng-template>
-                        <input class="btn btn-success" type="button" placeholder="Number" value="Update" (click)="addInformation()" />
-                    </ng-template>
                 </div>
                 <div class="col-sm-1">
                     <input class="btn btn-danger" type="button" placeholder="Number" value="Update" (click)="updateInformation(i)" />
@@ -28,5 +22,14 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-sm-12 form-group">
+        <input class="btn btn-success" type="button" placeholder="Number" value="Add" (click)="addRow()" />
+    </div>
+    <div class="col-sm-12 form-group">
+        <span class="btn btn-success btn-file ">Browse 
+                <input type="file" class="btn btn-success" (change)="upload($event)" multiple>
+        </span>
+        <img id="preview" src="" style="width: 200px;height: 200px">
     </div>
 </div>

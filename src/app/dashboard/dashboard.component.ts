@@ -2,7 +2,8 @@
 import { GlobalService } from './../services/global.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-
+import {Headers} from '@angular/http';
+declare const $: any;
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -77,14 +78,35 @@ export class DashboardComponent implements OnInit {
       })
   }
   public updateInformation(index) {
-    let id=this.infoForm.value.info[index]._id;
-    let data=this.infoForm.value.info[index]
+    let id = this.infoForm.value.info[index]._id;
+    let data = this.infoForm.value.info[index]
     let url = `http://localhost:3000/update/${id}`;
-    this.global.putRequest(url,data)
+    this.global.putRequest(url, data)
       .subscribe(res => {
         console.log("Update successfully")
       }, error => {
         console.log(error)
       })
+  }
+  public upload(fileInput) {
+    let url = "http://localhost:3000/upload";
+    if (fileInput.target.files && fileInput.target.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e: any) {
+        $('#preview').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(fileInput.target.files[0]);
+    }
+    console.log("hello",fileInput.target.files)
+ 
+    let formdata = new FormData()
+    formdata.append('file', fileInput.target.files[0])
+    formdata.append('name', "praveen")
+
+  
+      this.global.postRequest(url, formdata)
+        .subscribe(res => {
+          console.log("hello", res);
+        })
   }
 }
