@@ -46,7 +46,7 @@ export class DashboardComponent implements OnInit {
     this.infoForm.value.info.forEach(element => {
       delete element._id
     });
-    let url = "http://localhost:3000/add";
+    let url = "http://localhost:3000/api/home";
     this.global.postRequest(url, this.infoForm.value)
       .subscribe(res => {
         console.log(res);
@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit {
       })
   }
   public getInformation() {
-    let url = "http://localhost:3000/info";
+    let url = "http://localhost:3000/api/home";
     this.global.getRequest(url)
       .subscribe(res => {
         let tempArray = res.info;
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
       })
   }
   public deleteInformation(id) {
-    let url = `http://localhost:3000/delete/${id}`;
+    let url = `http://localhost:3000/api/home/${id}`;
     this.global.deleteRequest(url)
       .subscribe(res => {
         console.log("data deleted successfully")
@@ -80,7 +80,7 @@ export class DashboardComponent implements OnInit {
   public updateInformation(index) {
     let id = this.infoForm.value.info[index]._id;
     let data = this.infoForm.value.info[index]
-    let url = `http://localhost:3000/update/${id}`;
+    let url = `http://localhost:3000/home/${id}`;
     this.global.putRequest(url, data)
       .subscribe(res => {
         console.log("Update successfully")
