@@ -97,8 +97,7 @@ export class DashboardComponent implements OnInit {
       }
       reader.readAsDataURL(fileInput.target.files[0]);
     }
-    console.log("hello",fileInput.target.files)
- 
+    console.log("hello0",fileInput.target.files)
     let formdata = new FormData()
     formdata.append('file', fileInput.target.files[0])
     formdata.append('name', "praveen")
