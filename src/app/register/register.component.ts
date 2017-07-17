@@ -1,6 +1,7 @@
 import { GlobalService } from './../services/global.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
-  constructor(public _fb: FormBuilder,public global:GlobalService) { }
+  constructor(public _fb: FormBuilder,public global:GlobalService,public router:Router) { }
 
   ngOnInit() {
     this.registerForm = this._fb.group({
@@ -20,14 +21,12 @@ export class RegisterComponent implements OnInit {
   }
   public register(){
     let url="http://localhost:3000/auth/register";
-    this.global.postRequest(url,this.registerForm.value)
+    this.global.postRequest(url,this.registerForm.value,'login')
     .subscribe(res=>{
-      let userInfo={
-        _id:res.user._id,
-        token:res.token,
-        email:res.email
-      }
-      document.cookie=JSON.stringify(userInfo)
+      
+      localStorage.setItem('user-details',res.token);
+      this.router.navigate(['home']);
+     
     },err=>{
 
     })

@@ -23,14 +23,9 @@ export class LoginComponent implements OnInit {
   }
   public login(){
     let url="http://localhost:3000/auth/login";
-    this.global.postRequest(url,this.loginForm.value)
+    this.global.postRequest(url,this.loginForm.value,'login')
     .subscribe(res=>{
-       let userInfo={
-        _id:res.user._id,
-        token:res.token,
-        email:res.email
-      }
-      document.cookie=JSON.stringify(userInfo);
+      localStorage.setItem('user-details',res.token);
       this.router.navigate(['/home'])
     },err=>{
 

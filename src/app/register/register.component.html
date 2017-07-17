@@ -8,8 +8,11 @@
             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
             <input id="password" type="password" formControlName="password" class="form-control" name="password" placeholder="Password">
         </div>
-        <div class="col-sm-12 input-group">
-            <input type="button" class="btn btn-success form-control" (click)="register()" value="Register">
+        <div class="col-sm-6" style="padding-left:0">
+            <input class=" btn-success form-control" type="button" routerLink="./../login" value="Back">
         </div>
+        <div class="col-sm-6" style="padding-right:0">
+            <input class=" btn-success form-control" type="button" (click)="register()" value="Register">
+        </div>  
     </div>
 </div>

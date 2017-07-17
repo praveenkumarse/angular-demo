@@ -2,7 +2,7 @@
 import { GlobalService } from './../services/global.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import {Headers} from '@angular/http';
+import { Headers } from '@angular/http';
 declare const $: any;
 @Component({
   selector: 'app-dashboard',
@@ -42,12 +42,10 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  public addInformation() {
-    this.infoForm.value.info.forEach(element => {
-      delete element._id
-    });
+  public addInformation(index: number) {
+    let data = this.infoForm.value.info[index]
     let url = "http://localhost:3000/api/home";
-    this.global.postRequest(url, this.infoForm.value)
+    this.global.postRequest(url, data)
       .subscribe(res => {
         console.log(res);
       }, error => {
@@ -97,15 +95,15 @@ export class DashboardComponent implements OnInit {
       }
       reader.readAsDataURL(fileInput.target.files[0]);
     }
-    console.log("hello0",fileInput.target.files)
+    console.log("hello0", fileInput.target.files)
     let formdata = new FormData()
     formdata.append('file', fileInput.target.files[0])
     formdata.append('name', "praveen")
 
-  
-      this.global.postRequest(url, formdata)
-        .subscribe(res => {
-          console.log("hello", res);
-        })
+
+    this.global.postRequest(url, formdata)
+      .subscribe(res => {
+        console.log("hello", res);
+      })
   }
 }

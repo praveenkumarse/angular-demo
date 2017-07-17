@@ -10,9 +10,9 @@ export class GlobalService {
 
   constructor(public http: Http) { }
   public authorization(headers: Headers) {
-    let info=document.cookie;
-    console.log("cookie",info)
-    // headers.append('user', )
+    let info = localStorage.getItem('user-details');
+    console.log("data",info)
+    headers.append('Authorization', info);
   }
   public getRequest(url): Observable<any> {
     let headers = new Headers();
@@ -26,8 +26,9 @@ export class GlobalService {
     })
   }
 
-  public postRequest(url, data): Observable<any> {
+  public postRequest(url, data,status?): Observable<any> {
     let headers = new Headers();
+    if(status !='login')
     this.authorization(headers);
     return this.http.post(url, data, {
       headers: headers
