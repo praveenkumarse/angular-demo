@@ -6,13 +6,20 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { HeaderComponent } from './header/header.component';
 
 
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'home', component: DashboardComponent }
+  {
+    path: '', component: HeaderComponent,
+    children: [
+      { path: 'home', component: DashboardComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+    ]
+  },
+
+
 
 
 ]
@@ -22,7 +29,8 @@ export const routes: Routes = [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

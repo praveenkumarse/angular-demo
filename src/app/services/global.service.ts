@@ -11,7 +11,6 @@ export class GlobalService {
   constructor(public http: Http) { }
   public authorization(headers: Headers) {
     let info = localStorage.getItem('user-details');
-    console.log("data",info)
     headers.append('Authorization', info);
   }
   public getRequest(url): Observable<any> {

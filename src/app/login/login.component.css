@@ -1,3 +1,13 @@
 .main-container {
-    width: 500px;
+    width: 400px;
+}
+
+.inner-div {
+    padding: 25px 25px 25px 25px;
+    border: 1px solid;
+}
+
+.outer-div {
+    margin-top: 80px;
+    background: #F9F8F8;
 }

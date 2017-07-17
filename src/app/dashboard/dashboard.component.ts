@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
   public updateInformation(index) {
     let id = this.infoForm.value.info[index]._id;
     let data = this.infoForm.value.info[index]
-    let url = `http://localhost:3000/home/${id}`;
+    let url = `http://localhost:3000/api/home/${id}`;
     this.global.putRequest(url, data)
       .subscribe(res => {
         console.log("Update successfully")
@@ -87,7 +87,7 @@ export class DashboardComponent implements OnInit {
       })
   }
   public upload(fileInput) {
-    let url = "http://localhost:3000/upload";
+    let url = "http://localhost:3000/api/home/upload";
     if (fileInput.target.files && fileInput.target.files[0]) {
       var reader = new FileReader();
       reader.onload = function (e: any) {
@@ -95,7 +95,6 @@ export class DashboardComponent implements OnInit {
       }
       reader.readAsDataURL(fileInput.target.files[0]);
     }
-    console.log("hello0", fileInput.target.files)
     let formdata = new FormData()
     formdata.append('file', fileInput.target.files[0])
     formdata.append('name', "praveen")

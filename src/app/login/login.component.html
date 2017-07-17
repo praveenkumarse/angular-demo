@@ -1,18 +1,18 @@
-<div class="container main-container ">
-    <div class="row" style="margin-top: 90px" [formGroup]="loginForm">
-        <div class="input-group col-sm-12 form-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+<div class="container main-container outer-div">
+    <div class="row inner-div" [formGroup]="loginForm">
+        <div class="col-sm-12 form-group">
+            <label>Email</label>
             <input class="form-control" id="email" name="email" type="text" formControlName="email" placeholder="Email">
         </div>
-        <div class="input-group col-sm-12 form-group">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+        <div class=" col-sm-12 form-group">
+            <label>Password</label>
             <input class="form-control" id="password" name="password" type="password" formControlName="password" placeholder="Password">
         </div>
-        <div class="col-sm-6" style="padding-left:0">
+        <div class="col-sm-6">
             <input class=" btn-success form-control" type="button" (click)="login()" value="Login">
         </div>
-        <div class="col-sm-6" style="padding-right:0">
+        <div class="col-sm-6">
             <input class=" btn-success form-control" type="button" routerLink="./../register" value="Register">
-        </div>  
+        </div>
     </div>
 </div>
