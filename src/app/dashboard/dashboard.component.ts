@@ -1,5 +1,4 @@
 
-import { GlobalService } from './../services/global.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Headers } from '@angular/http';
@@ -12,7 +11,7 @@ declare const $: any;
 export class DashboardComponent implements OnInit {
   infoForm: FormGroup;
   info: any;
-  constructor(public fb: FormBuilder, public global: GlobalService) { }
+  constructor(public fb: FormBuilder) { }
 
   ngOnInit() {
 
@@ -20,6 +19,7 @@ export class DashboardComponent implements OnInit {
       info: this.fb.array([this.addInfo()])
     })
     this.getInformation();
+    this.authorize();
   }
   public addInfo(): FormGroup {
     return this.fb.group({
@@ -45,46 +45,46 @@ export class DashboardComponent implements OnInit {
   public addInformation(index: number) {
     let data = this.infoForm.value.info[index]
     let url = "http://localhost:3000/api/home";
-    this.global.postRequest(url, data)
-      .subscribe(res => {
-        console.log(res);
-      }, error => {
-        console.log(error)
-      })
+    // this.global.postRequest(url, data)
+    //   .subscribe(res => {
+    //     console.log(res);
+    //   }, error => {
+    //     console.log(error)
+    //   })
   }
   public getInformation() {
     let url = "http://localhost:3000/api/home";
-    this.global.getRequest(url)
-      .subscribe(res => {
-        let tempArray = res.info;
-        const temp = this.infoForm.controls['info'] as FormArray;
-        for (let key in tempArray) {
-          temp.at(parseInt(key)).patchValue(tempArray[key])
-          this.addRow();
-        }
-      }, error => {
-        console.log(error)
-      })
+    // this.global.getRequest(url)
+    //   .subscribe(res => {
+    //     let tempArray = res.info;
+    //     const temp = this.infoForm.controls['info'] as FormArray;
+    //     for (let key in tempArray) {
+    //       temp.at(parseInt(key)).patchValue(tempArray[key])
+    //       this.addRow();
+    //     }
+    //   }, error => {
+    //     console.log(error)
+    //   })
   }
   public deleteInformation(id) {
     let url = `http://localhost:3000/api/home/${id}`;
-    this.global.deleteRequest(url)
-      .subscribe(res => {
-        console.log("data deleted successfully")
-      }, error => {
-        console.log(error)
-      })
+    // this.global.deleteRequest(url)
+    //   .subscribe(res => {
+    //     console.log("data deleted successfully")
+    //   }, error => {
+    //     console.log(error)
+    //   })
   }
   public updateInformation(index) {
     let id = this.infoForm.value.info[index]._id;
     let data = this.infoForm.value.info[index]
     let url = `http://localhost:3000/api/home/${id}`;
-    this.global.putRequest(url, data)
-      .subscribe(res => {
-        console.log("Update successfully")
-      }, error => {
-        console.log(error)
-      })
+    // this.global.putRequest(url, data)
+    //   .subscribe(res => {
+    //     console.log("Update successfully")
+    //   }, error => {
+    //     console.log(error)
+    //   })
   }
   public upload(fileInput) {
     let url = "http://localhost:3000/api/home/upload";
@@ -100,9 +100,20 @@ export class DashboardComponent implements OnInit {
     formdata.append('name', "praveen")
 
 
-    this.global.postRequest(url, formdata)
-      .subscribe(res => {
-        console.log("hello", res);
-      })
+    // this.global.postRequest(url, formdata)
+    //   .subscribe(res => {
+    //     console.log("hello", res);
+    //   })
   }
+    
+    public authorize(){
+     let url = `http://localhost:3000/auth/protected`;
+    // this.global.getRequest(url)
+    //   .subscribe(res => {
+    //     console.log("Update successfully")
+    //   }, error => {
+    //     console.log(error)
+    //   })
+    }
+       
 }

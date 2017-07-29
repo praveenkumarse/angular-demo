@@ -14,7 +14,7 @@ export const routes: Routes = [
     path: '', component: HeaderComponent,
     children: [
       { path: 'home', component: DashboardComponent },
-      { path: 'callback', component: LoginComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
     ]
   },
